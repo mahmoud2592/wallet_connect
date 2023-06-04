@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: polykick_backend
+      POSTGRES_DB: polykick_backend_production
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3004 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+      # - ./run/postgresql/:/mayapp/run/postgresql/
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: polykick_backend
+      POSTGRES_DB: polykick_backend_production
+      POSTGRESS_HOST: db
+      POSTGRESS_PORT: '5432'
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: ["rails", "server", "-b", "0.0.0.0"]
+    tty: true
+    stdin_open: true
+

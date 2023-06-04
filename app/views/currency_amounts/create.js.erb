@@ -1,0 +1,6 @@
+// app/views/currency_amounts/create.js.erb
+
+$('#currency-amounts').append('<%= j render partial: "currency_amount", locals: { currency_amount: @currency_amount } %>');
+
+$('#currency_amount_currency').val('');
+$('#currency_amount_amount').val('');
