@@ -1,5 +1,3 @@
-<!-- app/views/wallets/show.html.erb -->
-
 <h1><%= @wallet.name %></h1>
 
 <h2>Description:</h2>
@@ -38,3 +36,15 @@
     });
   });
 </script>
+
+<h1>Wallet Details</h1>
+
+<!-- Wallet details... -->
+<p>Wallet address: <%= @wallet.address %></p>
+<p>Wallet balance: <%= @wallet.balance %></p>
+
+<% if @wallet.connected? %>
+  <p>Your wallet is already connected.</p>
+<% else %>
+  <%= link_to "Connect Wallet", connect_to_wallet_wallet_path(@wallet), class: "button" %>
+<% end %>

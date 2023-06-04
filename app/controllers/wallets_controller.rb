@@ -1,6 +1,27 @@
 class WalletsController < ApplicationController
   before_action :set_wallet, only: [:show, :edit, :update, :destroy]
 
+  def connect_to_wallet
+    provider = Web3::Provider.new(:metamask)
+
+    # Add the necessary logic to connect the user's wallet
+    if provider.connected?
+      # The wallet is already connected
+      flash[:notice] = "Wallet already connected"
+      redirect_to @wallet
+    else
+      # Prompt the user to connect their MetaMask wallet
+      begin
+        provider.enable
+        flash[:notice] = "Wallet connected successfully"
+        redirect_to @wallet
+      rescue Web3::ProviderError => e
+        flash[:error] = "Failed to connect wallet: #{e.message}"
+        redirect_to root_path
+      end
+    end
+  end
+
   def show
     @currency_amount = @wallet.currency_amounts.build
     @saved_entries = SavedEntry.all

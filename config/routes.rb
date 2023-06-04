@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :saved_entries, only: [:create, :destroy]
 
   resources :wallets do
+    member do
+      get 'connect_to_wallet'
+    end
     resources :transactions, only: [:index, :create]
     resources :currency_amounts, only: [:create, :destroy]
   end
