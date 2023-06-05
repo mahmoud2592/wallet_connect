@@ -1,8 +1,11 @@
+require 'eth'
+
 class WalletsController < ApplicationController
+
   before_action :set_wallet, only: [:show, :edit, :update, :destroy]
 
   def connect_to_wallet
-    provider = Web3::Provider.new(:metamask)
+    provider = Eth::Http::Client.new('https://mainnet.infura.io/v3/your_infura_project_id')
 
     # Add the necessary logic to connect the user's wallet
     if provider.connected?
@@ -15,7 +18,7 @@ class WalletsController < ApplicationController
         provider.enable
         flash[:notice] = "Wallet connected successfully"
         redirect_to @wallet
-      rescue Web3::ProviderError => e
+      rescue Eth::ProviderError => e
         flash[:error] = "Failed to connect wallet: #{e.message}"
         redirect_to root_path
       end

@@ -63,3 +63,4 @@ gem 'font-awesome-rails'
 
 # Environment variables gem
 gem 'dotenv-rails', groups: [:development, :test]
+# gem 'webpacker', '~> 6.0.0.rc.6'

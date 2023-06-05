@@ -1,3 +1,5 @@
 //= link_tree ../images
 //= link_directory ../stylesheets .css
-//= require web3modal
+//= require jquery
+//= require bootstrap
+//= link wallets/index.js

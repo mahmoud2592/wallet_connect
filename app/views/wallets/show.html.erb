@@ -1,0 +1,17 @@
+<h2>Currency Amounts:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wallet.currency_amounts.each do |currency_amount| %>
+      <tr>
+        <td><%= currency_amount.currency.address %></td>
+        <td><%= currency_amount.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
